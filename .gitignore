@@ -1,0 +1,28 @@
+# Build
+.build/
+DerivedData/
+
+# IDE
+*.xcworkspace
+*.xcuserdata
+*.xcodeproj/project.xcworkspace
+*.xcodeproj/xcuserdata
+.xcode/
+.swiftpm/xcode/
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Temporary
+tmp/
+temp/
+*.log
+
+# Package artifacts (keep Package.resolved for reproducible builds)

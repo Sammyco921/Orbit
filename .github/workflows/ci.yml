@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main, release]
+  pull_request:
+    branches: [main, release]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SWIFT_VERSION: "5.9"
+
+jobs:
+  macos:
+    strategy:
+      matrix:
+        os: [macos-14, macos-15]
+        xcode: ["16.0", "16.1"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache SwiftPM
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-swift-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: ${{ env.SWIFT_VERSION }}
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
+
+  linux:
+    runs-on: ubuntu-latest
+    container: swift:${{ env.SWIFT_VERSION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache SwiftPM
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-swift-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-
+      - name: Build
+        run: swift build
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: Sources Tests
