@@ -1,0 +1,17 @@
+#!/bin/bash
+# Pre-commit hook: run SwiftLint on staged Swift files
+set -e
+
+STAGED_SWIFT=$(git diff --cached --name-only --diff-filter=ACM | grep '\.swift$' || true)
+if [ -z "$STAGED_SWIFT" ]; then
+    exit 0
+fi
+
+if ! command -v swiftlint &> /dev/null; then
+    echo "warning: SwiftLint not installed — skipping lint check"
+    echo "  Install via: brew install swiftlint"
+    exit 0
+fi
+
+echo "Running SwiftLint on staged files..."
+swiftlint lint --strict --quiet $STAGED_SWIFT

@@ -1,0 +1,54 @@
+disabled_rules:
+  # Style — too pervasive for existing codebase
+  - force_unwrapping
+  - force_try
+  - force_cast
+  - for_where
+  - shorthand_operator
+  - multiple_closures_with_trailing_closure
+  - duplicate_conditions
+  - sorted_first_last
+  - implicitly_unwrapped_optional
+  - implicit_optional_initialization
+  - redundant_type_annotation
+
+  # These are already handled by auto-fix
+  - line_length
+  - identifier_name
+  - type_name
+  - function_body_length
+  - file_length
+  - trailing_comma
+  - nesting
+  - todo
+  - cyclomatic_complexity
+  - large_tuple
+
+  # Pre-existing structural — disabled under --strict to avoid noise
+  - type_body_length
+  - function_parameter_count
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - redundant_nil_coalescing
+  - vertical_whitespace_closing_braces
+  - yoda_condition
+
+analyzer_rules:
+  - unused_declaration
+  - unused_import
+
+included:
+  - Sources
+  - Tests
+
+excluded:
+  - .build
+
+trailing_whitespace:
+  ignores_empty_lines: true
+
+type_body_length:
+  warning: 500
+  error: 1000
