@@ -1,0 +1,80 @@
+
+# macOS
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+
+# Xcode / Swift
+
+build/
+DerivedData/
+*.xcworkspace
+*.xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.swiftpm/
+*.swiftsourceinfo
+
+# Xcode archives
+*.xcarchive
+
+# Swift Package Manager
+.build/
+Package.resolved
+
+
+# App build artifacts
+
+*.app
+*.ipa
+*.dSYM
+
+
+# Logs / runtime
+
+*.log
+Logs/
+tmp/
+
+
+# Environment / secrets
+
+.env
+.env.local
+.env.*
+
+# API keys / credentials
+secrets.json
+credentials.json
+
+
+# Python examples (Orbit client tools)
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.env/
+
+
+
+# IDE / editor noise
+
+.vscode/
+.idea/
+*.swp
+
+
+# Orbit-specific (optional but useful)
+
+.orbit-cache/
+.orbit-temp/
+*.orbitstate
